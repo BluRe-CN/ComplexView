@@ -21,6 +21,22 @@ implementation 'com.github.BluRe-CN:ComplexView:v1.0'
     
 }
 ```
+# Maven setup
+
+``` xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+     <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+    
+<dependency>
+  <groupId>com.github.BluRe-CN</groupId>
+   <artifactId>ComplexView</artifactId>
+   <version>Tag</version>
+</dependency>
+```
 # Usage
 ![Alt text](https://github.com/BluRe-CN/ComplexView/blob/master/screenshots/shadow.PNG "Shadow sample")
 

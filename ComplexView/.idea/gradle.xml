@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$ADB$/Users/BluRe/Desktop/Reviewz" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$ADB$/Users/BluRe/Desktop/Reviewz/app" />
+            <option value="$ADB$/Users/BluRe/Desktop/Reviewz/lib" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

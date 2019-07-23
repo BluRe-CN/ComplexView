@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ComplexView">
+        <attr name="animationDuration" format="integer" />
+        <attr name="fromXScale" format="float" />
+        <attr name="toXScale" format="float" />
+        <attr name="fromYScale" format="float" />
+        <attr name="toYScale" format="float" />
+        <attr name="pX" format="float" />
+        <attr name="pY" format="float" />
+        <attr name="amplitude" format="float" />
+        <attr name="frequency" format="float" />
+        <attr name="topLeftRadius" format="dimension" />
+        <attr name="topRightRadius" format="dimension" />
+        <attr name="bottomLeftRadius" format="dimension" />
+        <attr name="bottomRightRadius" format="dimension" />
+        <attr name="clickTransferable" format="boolean" />
+        <attr name="radius" format="dimension" />
+        <attr name="color" format="color" />
+        <attr name="interpolate" format="boolean" />
+        <attr name="onclickColor" format="color" />
+        <attr name="shape" format="string" />
+        <attr name="animate" format="boolean" />
+        <attr name="shadow" format="boolean" />
+        <attr name="shadowAlpha" format="integer" />
+        <attr name="shadowColor" format="string" />
+        <attr name="shadowSpread" format="integer" />
+        <attr name="gradientCenterColor" format="color" />
+        <attr name="gradientStartColor" format="color" />
+        <attr name="gradientEndColor" format="color" />
+        <attr name="gradientAngle" format="string" />
+        <attr name="gradientType" format="string" />
+        <attr name="clickAfterAnimation" format="boolean"/>
+        <attr name="selfClickable" format="boolean" />
+    </declare-styleable>
+</resources>

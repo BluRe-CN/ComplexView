@@ -77,5 +77,10 @@ Code to achieve the above effect
         tvParam.setMargins(5, 5, 5, 5);
         tv.setLayoutParams(tvParam);
         tv.setText("Shadow");
+        
+        //Couple up
+        tvHolder.addView(tv);
+        shadow.addView(tvHolder);
+        YourMainView.addView(shadow);
 
  ```

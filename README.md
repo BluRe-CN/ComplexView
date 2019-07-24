@@ -1,6 +1,8 @@
 # ComplexView
-A simple Android library that applies shadows of any color to views and allows easy manipulation of edges.
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-ComplexView-green.svg?style=flat )]( https://android-arsenal.com/details/1/7786 )
 \
+\
+A simple Android library that applies shadows of any color to views and allows easy manipulation of edges.
 \
 \
 \

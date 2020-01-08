@@ -1,0 +1,4 @@
+#Wed Jan 08 13:54:13 WAT 2020
+base.0=C\:\\Users\\BluRe\\Desktop\\ComplexView\\ComplexViewExample\\build\\intermediates\\transforms\\dexMerger\\debug\\8
+path.0=classes.dex
+renamed.0=classes.dex

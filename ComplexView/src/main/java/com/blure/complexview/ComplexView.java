@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
  */
 
 public class ComplexView extends RelativeLayout implements View.OnClickListener, Animation.AnimationListener {
-    float[] initRad, radii;
     private float amplitude;
     private OnClickListener pClick;
     private float frequency;
@@ -54,6 +53,8 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     private boolean fromChild;
     private Interpolator interpolator;
     private boolean first = true;
+    private Shadow shadow;
+    private Shadow.Position shadowPosition = Shadow.Position.CENTER;
 
 
     public ComplexView(Context context) {
@@ -66,32 +67,6 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
         init(attrs);
     }
 
-    /**
-     * Returns the radii of ComplexView
-     */
-    public float getRadius() {
-        return this.rad;
-    }
-
-    /**
-     * Sets the radius ComplexView
-     *
-     * @param radius Preferred radius
-     */
-    public void setRadius(float radius) {
-        this.rad = radius;
-        gd.setCornerRadius(radius);
-    }
-
-    /**
-     * Converts ComplexView into a shadow object.
-     * This is to be used as a parent to another view.
-     *
-     * @param shadow An initialized shadow object.
-     */
-    public void setShadow(Shadow shadow) {
-        setBackground(shadow.getShadow());
-    }
 
     private void init(AttributeSet set) {
         TypedArray ta = getContext().obtainStyledAttributes(set, R.styleable.ComplexView);
@@ -166,6 +141,24 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
                     break;
             }
         }
+        String sPosition = ta.getString(R.styleable.ComplexView_shadowPosition);
+        if (sPosition != null) {
+            switch (sPosition) {
+                case "top":
+                    shadowPosition = Shadow.Position.TOP;
+                    break;
+                case "left":
+                    shadowPosition = Shadow.Position.LEFT;
+                    break;
+                case "right":
+                    shadowPosition = Shadow.Position.RIGHT;
+                    break;
+                case "bottom":
+                    shadowPosition = Shadow.Position.BOTTOM;
+                    break;
+            }
+        }
+
         setShape(shape);
         if (!isEmpty(colors)) {
             gd.setColors(colors);
@@ -175,18 +168,18 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
         }
         setGradientType(gradientType);
         setGradientAngle(gradientAngle);
-        initRad = new float[]{rad, rad, rad, rad, rad, rad, rad, rad};
-        radii = new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius};
-        float[] radToSet = rad == 0 ? radii : initRad;
+        float[] initRad = new float[]{rad, rad, rad, rad, rad, rad, rad, rad};
+        float[] radius = new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius};
+        float[] radToSet = rad == 0 ? radius : initRad;
         setCornerRadii(radToSet);
         if (shadow) {
-            setBackground(new Shadow(spread, shadowAlpha, shadowColor, shape, radToSet).getShadow());
+            this.shadow = new Shadow(spread, shadowAlpha, shadowColor, shape, radToSet, shadowPosition);
+            setBackground(this.shadow.getShadow());
         } else
             setBackground(gd);
         setOnClickListener(this);
         ta.recycle();
     }
-
 
     /**
      * Set the shape of ComplexView.
@@ -215,7 +208,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
         return amplitude;
     }
 
-      public void setAmplitude(float amplitude) {
+    public void setAmplitude(float amplitude) {
         this.amplitude = amplitude;
     }
 
@@ -259,6 +252,43 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     public void setAnimationDuration(int animationDuration) {
         this.animationDuration = animationDuration;
     }
+
+    /**
+     * Returns the radius of ComplexView
+     */
+    public float getRadius() {
+        return this.rad;
+    }
+
+    /**
+     * Sets the radius ComplexView
+     *
+     * @param radius Preferred radius
+     */
+    public void setRadius(float radius) {
+        this.rad = radius;
+        gd.setCornerRadius(radius);
+    }
+
+    /**
+     * @return The shadow Object applied to this ComplexView if any
+     * @since 1.1
+     */
+
+    public Shadow getShadow() {
+        return shadow;
+    }
+
+    /**
+     * Converts ComplexView into a shadow object.
+     * This is to be used as a parent to another view.
+     * 
+     * @param shadow An initialized shadow object.
+     */
+    public void setShadow(Shadow shadow) {
+        setBackground(shadow.getShadow());
+    }
+
 
     public float getToXScale() {
         return toXScale;
@@ -353,7 +383,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     }
 
     /**
-     * Sets the bottom left radii value of the ComplexView
+     * Sets the bottom left radius value of the ComplexView
      */
     public void setBottomLeftRadius(float bottomLeftRadius) {
         this.bottomLeftRadius = bottomLeftRadius;
@@ -371,11 +401,11 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     }
 
     /**
-     * Sets the corner radii of ComplexView
+     * Sets the corner radius of ComplexView
      *
      * @param radii Must be of 4 float values comprising of topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius
      */
-    private void setCornerRadii(float[] radii) {
+    public void setCornerRadii(float[] radii) {
         gd.setCornerRadii(radii);
     }
 
@@ -400,26 +430,26 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
             return;
         }
         ViewParent parent = getParent();
-        if (parent instanceof ComplexView) {
-            if (transferClick) {
-                ComplexView complexView = (ComplexView) parent;
-                complexView.fromChild = true;
-                complexView.onClick(complexView);
-            }
+        if (parent instanceof ComplexView && transferClick) {
+            ComplexView complexView = (ComplexView) parent;
+            complexView.fromChild = true;
+            complexView.onClick(complexView);
         }
 
         if (onclickColor != -1) {
             gd.setColor(onclickColor);
         }
-        if (animate && clickAfterAnimation) {
-            view = v;
+        if (animate) {
+            if (!clickAfterAnimation) {
+                if (pClick != null) pClick.onClick(v);
+            }
             startAnimation(animation);
+            return;
         }
-        if (pClick != null && !clickAfterAnimation) {
-            pClick.onClick(v);
-        }
+        if (pClick != null) pClick.onClick(v);
         fromChild = false;
     }
+
 
     public void startAnimation() {
         startAnimation(animation);
@@ -441,7 +471,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     @Override
     public void onAnimationEnd(Animation animation) {
         gd.setColor(color);
-        if (pClick != null) {
+        if (clickAfterAnimation && pClick != null) {
             pClick.onClick(view);
         }
     }

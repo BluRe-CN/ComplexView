@@ -32,5 +32,6 @@
         <attr name="gradientType" format="string" />
         <attr name="clickAfterAnimation" format="boolean"/>
         <attr name="selfClickable" format="boolean" />
+        <attr name="shadowPosition" format="string" />
     </declare-styleable>
 </resources>

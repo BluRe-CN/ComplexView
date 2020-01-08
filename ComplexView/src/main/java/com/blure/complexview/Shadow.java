@@ -110,7 +110,7 @@ public class Shadow {
     }
 
     /**
-     * Controls how the shadow is positioned to ComplexViews.
+     * Controls how this shadow is positioned to ComplexViews.
      */
     public enum Position {
         /**

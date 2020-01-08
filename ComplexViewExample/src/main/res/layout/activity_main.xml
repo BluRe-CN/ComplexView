@@ -157,7 +157,6 @@
                 android:padding="10dp"
                 app:bottomLeftRadius="20dp"
                 app:bottomRightRadius="20dp"
-                android:id="@+id/base"
                 app:color="#fdfcfc"
                 >
 

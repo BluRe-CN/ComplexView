@@ -21,7 +21,7 @@ repositories{
 
 dependencies{
 
-implementation 'com.github.BluRe-CN:ComplexView:v1.0'
+implementation 'com.github.BluRe-CN:ComplexView:v1.1'
     
 }
 ```

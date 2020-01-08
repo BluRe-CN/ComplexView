@@ -247,7 +247,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
 
 
     /**
-     * Set the duration of the default animation.
+     * Sets the duration of the default animation.
      *
      * @param animationDuration duration of animation in millis.
      */

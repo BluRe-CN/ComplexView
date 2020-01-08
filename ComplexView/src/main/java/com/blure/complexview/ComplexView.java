@@ -233,6 +233,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
      *
      * @param color onclick color
      */
+    
     public void setOnclickColor(int color) {
         this.onclickColor = color;
     }
@@ -243,6 +244,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     public int getAnimationDuration() {
         return animationDuration;
     }
+
 
     /**
      * Set the duration of the default animation.
@@ -282,7 +284,7 @@ public class ComplexView extends RelativeLayout implements View.OnClickListener,
     /**
      * Converts ComplexView into a shadow object.
      * This is to be used as a parent to another view.
-     * 
+     *
      * @param shadow An initialized shadow object.
      */
     public void setShadow(Shadow shadow) {

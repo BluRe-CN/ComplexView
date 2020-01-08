@@ -1,7 +1,7 @@
 package com.blure.complexviewexample;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import com.blure.complexview.Shadow;
 
 import static android.widget.RelativeLayout.CENTER_IN_PARENT;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         complexView.addView(view);
         Shadow shadow = new Shadow(1, 100, "#000000", GradientDrawable.RECTANGLE, radii, Shadow.Position.CENTER);
         complexView.setShadow(shadow);
-        ComplexView cv = vg.findViewById(R.id.base);
-        //cv.setOnTouchListener(this);
-        cv.setOnClickListener(this);
         vg.addView(complexView);
-    }
-
-    @Override
-    public void onClick(View view) {
-System.out.println("What touched");
     }
 
 }
